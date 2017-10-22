@@ -1,4 +1,4 @@
-module Dom.Size exposing ( height, width, Boundary(..) )
+module Dom.Size exposing ( left, top, width, height, Boundary(..) )
 
 {-| Figuring out the size of a node is actually pretty tricky. Nodes have
 padding, borders, and margins. You can also scroll the content in a node in
@@ -18,14 +18,24 @@ import Native.Dom
 import Task exposing (Task)
 
 
-{-| Get the height of a node, measured along a certain boundary.
+{-| Get the position from left of a node, measured along a certain boundary.
 
 If the node has the `hidden` attribute or the `display: none` style, this
 will be zero.
 -}
-height : Boundary -> Id -> Task Error Float
-height =
-  Native.Dom.height
+left : Boundary -> Id -> Task Error Float
+left =
+  Native.Dom.left
+
+
+{-| Get the position from top of a node, measured along a certain boundary.
+
+If the node has the `hidden` attribute or the `display: none` style, this
+will be zero.
+-}
+top : Boundary -> Id -> Task Error Float
+top =
+  Native.Dom.top
 
 
 {-| Get the width of a node, measured along a certain boundary.
@@ -36,6 +46,16 @@ will be zero.
 width : Boundary -> Id -> Task Error Float
 width =
   Native.Dom.width
+
+
+{-| Get the height of a node, measured along a certain boundary.
+
+If the node has the `hidden` attribute or the `display: none` style, this
+will be zero.
+-}
+height : Boundary -> Id -> Task Error Float
+height =
+  Native.Dom.height
 
 
 {-| Check out [this diagram][diagram] to understand what all of these

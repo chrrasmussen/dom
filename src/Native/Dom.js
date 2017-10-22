@@ -127,6 +127,42 @@ function toRight(id)
 
 // SIZE
 
+function left(options, id)
+{
+	return withNode(id, function(node) {
+		switch (options.ctor)
+		{
+			case 'Content':
+				return node.scrollLeft;
+			case 'VisibleContent':
+				return node.clientLeft;
+			case 'VisibleContentWithBorders':
+				return node.offsetLeft;
+			case 'VisibleContentWithBordersAndMargins':
+				var rect = node.getBoundingClientRect();
+				return rect.left;
+		}
+	});
+}
+
+function top(options, id)
+{
+	return withNode(id, function(node) {
+		switch (options.ctor)
+		{
+			case 'Content':
+				return node.scrollTop;
+			case 'VisibleContent':
+				return node.clientTop;
+			case 'VisibleContentWithBorders':
+				return node.offsetTop;
+			case 'VisibleContentWithBordersAndMargins':
+				var rect = node.getBoundingClientRect();
+				return rect.top;
+		}
+	});
+}
+
 function width(options, id)
 {
 	return withNode(id, function(node) {
@@ -177,6 +213,8 @@ return {
 	toBottom: toBottom,
 	toRight: toRight,
 
+	left: F2(left),
+	top: F2(top),
 	height: F2(height),
 	width: F2(width)
 };
